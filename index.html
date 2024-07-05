@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Sentences</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .sentence {
+            width: 150px; /* Adjust as needed */
+            height: 150px; /* Ensure square */
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sentence p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        ::selection {
+            background-color: #ffe0a8; /* Light orange */
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1>Select Text on the Page</h1>
+    <p>Select some text on this page to generate a video.</p>
+    <p>You can select text by clicking and dragging your mouse over it.</p>
+    </center>
+
+    <div class="container">
+        <div class="sentence">
+            <p>The cat chased the mouse.</p>
+        </div>
+        <div class="sentence">
+            <p>The dog and the cat played together.</p>
+        </div>
+        <div class="sentence">
+            <p>The sun and the moon shone brightly.</p>
+        </div>
+        <div class="sentence">
+            <p>The tree and the bush swayed in the wind.</p>
+        </div>
+        <div class="sentence">
+            <p>The car and the truck honked loudly.</p>
+        </div>
+        <div class="sentence">
+            <p>The teacher and the students listened attentively.</p>
+        </div>
+        <div class="sentence">
+            <p>The bird and the butterfly flew by.</p>
+        </div>
+        <div class="sentence">
+            <p>The boy and the girl went for a walk.</p>
+        </div>
+        <div class="sentence">
+            <p>The apple and the banana were ripe.</p>
+        </div>
+        <div class="sentence">
+            <p>The flower and the bee danced in the breeze.</p>
+        </div>
+        <div class="sentence">
+            <p>The river and the lake flowed peacefully.</p>
+        </div>
+        <div class="sentence">
+            <p>The sun and the clouds played hide and seek.</p>
+        </div>
+        <div class="sentence">
+            <p>The mountain and the valley echoed with sounds.</p>
+        </div>
+        <div class="sentence">
+            <p>The book and the pen were on the table.</p>
+        </div>
+        <div class="sentence">
+            <p>The bird and the worm sang together.</p>
+        </div>
+        <div class="sentence">
+            <p>The fish and the turtle swam in the pond.</p>
+        </div>
+        <div class="sentence">
+            <p>The lion and the tiger roared loudly.</p>
+        </div>
+        <div class="sentence">
+            <p>The elephant and the giraffe walked slowly.</p>
+        </div>
+        <div class="sentence">
+            <p>The river and the stream flowed gently.</p>
+        </div>
+        <div class="sentence">
+            <p>The flower and the butterfly were beautiful.</p>
+        </div>
+
+        <div class="sentence">
+            <p>The tree and the bush swayed in the breeze.</p>
+        </div>
+        <div class="sentence">
+            <p>The river and the stream flowed peacefully.</p>
+        </div>
+        <div class="sentence">
+            <p>The flower and the butterfly were beautiful.</p>
+        </div>
+        <div class="sentence">
+            <p>The mountain and the valley echoed with sounds.</p>
+        </div>
+        
+        
+        <button class="generate-btn" onclick="generateVideo()">Generate Video</button>
+        
+    </div>
+
+    <script>
+        function generateVideo() {
+            var selectedText = window.getSelection().toString().trim();
+
+            if (selectedText) {
+                fetch('http://127.0.0.1:5000/generate-video', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ selected_text: selectedText })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Video generated successfully!');
+                    } else {
+                        alert('Failed to generate video. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                });
+            } else {
+                alert('Please select some text to generate a video.');
+            }
+        }
+    </script>
+</body>
+</html>

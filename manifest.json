@@ -1,0 +1,26 @@
+
+{
+    "manifest_version": 3,
+    "name": "Text to Video",
+    "version": "1.0",
+    "description": "Select text from any site and generate a video.",
+    "permissions": [
+      "contextMenus",
+      "activeTab",
+      "scripting"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "host_permissions": ["http://localhost:5000/"]
+  }
+  
